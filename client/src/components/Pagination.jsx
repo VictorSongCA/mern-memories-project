@@ -11,9 +11,11 @@ const Paginate = ({ page }) => {
     const { numberOfPages } = useSelector((state) => state.posts);
     const classes = useSytles();
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
+        
         if (page) dispatch(getPosts(page));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
     return (

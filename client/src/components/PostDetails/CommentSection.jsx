@@ -45,10 +45,10 @@ const CommentSection = ({ post }) => {
                         <Typography gutterBottom variant="h6">Write a Comment</Typography>
                         <TextField
                             fullWidth
-                            rows={4}
+                            minRows={4}
                             variant="outlined"
                             label="Comment"
-                            multiline
+                            multiline={true}
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                         />
