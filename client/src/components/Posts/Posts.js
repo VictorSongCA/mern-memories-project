@@ -14,7 +14,7 @@ const Posts = ({setCurrentId}) => {
     if (!posts.length && !isLoading) return 'No posts';
 
     return(
-        isLoading ? <CircularProgress /> : (
+        isLoading ? <CircularProgress /> : (            
             // className={classes.container}, seems like there is no container in sytles.js, 
             // that means, className={classes.container} is not necessary
             <Grid className={classes.container} container alignItems='stretch' spacing={3}>

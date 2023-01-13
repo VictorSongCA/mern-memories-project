@@ -1,6 +1,6 @@
 import { FETCH_ALL, FETCH_POST, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, START_LOADING, END_LOADING, COMMENT } from '../constants/actionTypes';
 
-export default (state = { isLoading: true, posts: [] }, action) => {
+const reducers = (state = { isLoading: true, posts: [] }, action) => {
     switch (action.type) {
         case START_LOADING:
             return { ...state, isLoading: true };
@@ -16,7 +16,7 @@ export default (state = { isLoading: true, posts: [] }, action) => {
                 ...state,
                 posts: action.payload.data,
                 currentPage: action.payload.currentPage,
-                numberOfPages: action.payload.numberOfPages,
+                numberOfPages: action.payload.numberOfPages,                
             };
         case FETCH_BY_SEARCH:
             return { ...state, posts: action.payload };
@@ -39,4 +39,6 @@ export default (state = { isLoading: true, posts: [] }, action) => {
         default:
             return state;
     }
-}
+};
+
+export default reducers;

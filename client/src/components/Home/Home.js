@@ -12,7 +12,7 @@ import Form from '../Form/Form';
 import useStyles from './styles';
 
 function useQuery() {
-    return new URLSearchParams(useLocation().searcch);
+    return new URLSearchParams(useLocation().search); 
 }
 
 const Home = () => {
@@ -21,6 +21,7 @@ const Home = () => {
     const query = useQuery();
     const history = useHistory();
     const page = query.get('page') || 1;
+    console.log(page);
     const searchQuery = query.get('searchQuery');
     const classes = useStyles();
     const [search, setSearch] = useState('');

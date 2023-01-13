@@ -19,8 +19,8 @@ const Post = ({ post, setCurrentId }) => {
     const [likes, setLikes] = useState(post?.likes);
 
     const userId = user?.result.sub || user?.result?._id;
-    const hasLikedPost = likes.find((like) => like === userId);   
-    
+    const hasLikedPost = likes.find((like) => like === userId);
+
     // console.log(user?.result?.sub);
     // console.log(user);
     // console.log(user?.result?._id);
@@ -35,7 +35,7 @@ const Post = ({ post, setCurrentId }) => {
             setLikes(post.likes.filter((id) => id !== userId));
         } else {
             setLikes([...post.likes, userId]);
-        }        
+        }
     };
 
     const Likes = () => {
@@ -55,20 +55,12 @@ const Post = ({ post, setCurrentId }) => {
 
     return (
         <Card className={classes.card} raised elevation={6}>
-            <ButtonBase component="span" name="test" className={classes.cardAction} onClick={openPost}>
+            <ButtonBase className={classes.cardAction} onClick={openPost}>
                 <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
                 <div className={classes.overlay}>
                     <Typography variant="h6">{post.name}</Typography>
                     <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
                 </div>
-                {/* sub means googleId using Login with Google */}
-                {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
-                    <div className={classes.overlay2} name="edit">
-                        <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}>
-                            <MoreHorizIcon fontSize="default" />
-                        </Button>
-                    </div>
-                )}
                 <div className={classes.details}>
                     <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
                 </div>
@@ -77,12 +69,25 @@ const Post = ({ post, setCurrentId }) => {
                     <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
                 </CardContent>
             </ButtonBase>
+
+            {/* sub means googleId using Login with Google */}
+            {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
+                <div className={classes.overlay2} name="edit">
+                    <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}>
+                        <MoreHorizIcon fontSize="default" />
+                    </Button>
+                </div>
+            )}
+
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
                     <Likes />
-                </Button>                
+                </Button>
                 {(user?.result?.sub === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+                    <Button size="small" color="primary" onClick={() => {
+                        dispatch(deletePost(post._id));
+                        history.push('/');
+                    }}>
                         <DeleteIcon fontSize="small" /> Delete
                     </Button>
                 )}

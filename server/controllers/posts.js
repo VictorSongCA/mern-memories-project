@@ -3,16 +3,17 @@ import PostMessage from "../models/postMessage.js";
 
 export const getPosts = async (req, res) => {
     const { page } = req.query;
-
+    
     try {
         const LIMIT = 8;
         // get the starting index of every page
         const startIndex = (Number(page) - 1) * LIMIT;
         const total = await PostMessage.countDocuments({}); // count how many posts we have
 
-        const posts = await PostMessage.find().sort({ _id: -1}).limit(LIMIT).skip(startIndex); // .sort will give the newest post first
+        const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex); // .sort will give the newest post first
 
-        //console.log(postMessages);
+        //console.log(posts);
+        //console.log(startIndex);
 
         res.status(200).json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
     } catch (error) {

@@ -87,7 +87,7 @@ const Auth = () => {
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
-          <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}>
+          <GoogleOAuthProvider clientId="789000246152-53mv0l83ja5io5a7h46c5redood1prc5.apps.googleusercontent.com">
           <Button fullWidth>
           <GoogleLogin
             render={(renderProps) => (
